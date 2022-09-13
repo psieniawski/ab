@@ -8,17 +8,13 @@
 tasks.register("build") {
     group = "build"
     description = "Build all sources"
-    dependsOn(gradle.includedBuild("dummy-a").task(":api:build"))
-    dependsOn(gradle.includedBuild("dummy-a").task(":impl:build"))
-    dependsOn(gradle.includedBuild("dummy-b").task(":api:build"))
-    dependsOn(gradle.includedBuild("dummy-b").task(":impl:build"))
+    dependsOn(gradle.includedBuild("dummy-a").task(":build"))
+    dependsOn(gradle.includedBuild("dummy-b").task(":build"))
 }
 
 tasks.register("clean") {
     group = "clean"
     description = "Clean"
-    dependsOn(gradle.includedBuild("dummy-a").task(":api:clean"))
-    dependsOn(gradle.includedBuild("dummy-a").task(":impl:clean"))
-    dependsOn(gradle.includedBuild("dummy-b").task(":api:clean"))
-    dependsOn(gradle.includedBuild("dummy-b").task(":impl:clean"))
+    dependsOn(gradle.includedBuild("dummy-a").task(":clean"))
+    dependsOn(gradle.includedBuild("dummy-b").task(":clean"))
 }

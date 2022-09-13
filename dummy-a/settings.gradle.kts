@@ -1,3 +1,7 @@
+pluginManagement {
+    includeBuild("../build-logic")
+}
+
 rootProject.name = "dummy-a"
 
 include("api")

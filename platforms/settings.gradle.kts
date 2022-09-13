@@ -1,3 +1,5 @@
 rootProject.name = "platforms"
 
 include("plugins-platform")
+include("product-platform")
+
