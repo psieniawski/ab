@@ -1,7 +1,8 @@
 dependencyResolutionManagement {
     repositories {
         gradlePluginPortal()
-        google()
+        maven { url = uri("https://repo.spring.io/milestone") }
+//        google()
     }
 }
 includeBuild("../platforms")
@@ -10,3 +11,4 @@ includeBuild("../platforms")
 rootProject.name = "build-logic"
 include("kotlin-lib")
 include("spring-kotlin-lib")
+

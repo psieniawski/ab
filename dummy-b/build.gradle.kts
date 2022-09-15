@@ -1,3 +1,8 @@
+plugins{
+    kotlin("jvm") version "1.7.10" apply false
+    kotlin("plugin.spring") version "1.7.10" apply false
+}
+
 tasks.register("build") {
     group = "build"
     description = "Build all sources"
