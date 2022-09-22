@@ -5,7 +5,7 @@ rootProject.name = "ab"
 
 includeBuild("build-logic")
 includeBuild("platforms")
-
+includeBuild("tech")
 includeBuild("dummy-b")
 includeBuild("dummy-a")
 

@@ -6,10 +6,6 @@ pluginManagement {
     }
 }
 
-rootProject.name = "dummy-b"
+rootProject.name = "tech"
 
-include("api")
-include("impl")
-include("spring-rest-api")
-include("impl-spring-boot-starter")
-include("app")
+include("boot-app")
