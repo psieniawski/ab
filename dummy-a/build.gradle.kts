@@ -13,7 +13,7 @@ tasks.register("build") {
     dependsOn(project(":impl").tasks["build"])
     dependsOn(project(":spring-rest-api").tasks["build"])
     dependsOn(project(":impl-spring-boot-starter").tasks["build"])
-    dependsOn(project(":app").tasks["build"])
+    dependsOn(project(":boot-app").tasks["build"])
 }
 
 tasks.register("clean") {
@@ -23,5 +23,5 @@ tasks.register("clean") {
     dependsOn(project(":impl").tasks["clean"])
     dependsOn(project(":spring-rest-api").tasks["clean"])
     dependsOn(project(":impl-spring-boot-starter").tasks["clean"])
-    dependsOn(project(":app").tasks["clean"])
+    dependsOn(project(":boot-app").tasks["clean"])
 }
