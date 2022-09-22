@@ -3,6 +3,10 @@ plugins {
     id("org.springframework.boot")
 }
 
+springBoot {
+    mainClass.value("ab.TheAppKt")
+}
+
 dependencies {
-    implementation("org.springframework.boot:spring-boot-autoconfigure")
+    implementation("ab.tech:boot-app")
 }
