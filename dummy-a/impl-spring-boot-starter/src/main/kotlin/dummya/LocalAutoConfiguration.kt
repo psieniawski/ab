@@ -1,10 +1,10 @@
-package dummyb
+package dummya
 
 import org.springframework.boot.autoconfigure.AutoConfiguration
 import org.springframework.context.annotation.Bean
 
 @AutoConfiguration
-class LocalConfig {
+class LocalAutoConfiguration {
     @Bean
-    fun dummy(): DummyB = DummyBImpl()
+    fun dummyA(): DummyA = DummyAImpl()
 }

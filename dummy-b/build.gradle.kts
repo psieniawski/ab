@@ -1,7 +1,7 @@
 plugins{
-    kotlin("jvm") version "1.7.10" apply false
-    kotlin("plugin.spring") version "1.7.10" apply false
-    id("org.springframework.boot") version "2.7.3" apply false
+    kotlin("jvm") version "1.7.20" apply false
+    kotlin("plugin.spring") version "1.7.20" apply false
+    id("org.springframework.boot") version "3.0.0-M5" apply false
 }
 
 tasks.register("build") {
