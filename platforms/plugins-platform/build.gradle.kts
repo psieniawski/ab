@@ -6,7 +6,7 @@ group = "ab.platform"
 
 //javaPlatform.allowDependencies()
 val kotlinVersion = "1.7.20"
-val springBootVersion = "3.0.0-M5"
+val springBootVersion = "2.7.4"
 
 dependencies {
     constraints {
