@@ -1,0 +1,65 @@
+name: Package and publish
+on:
+  workflow_call:
+    inputs:
+      image-name:
+        description: 'Name of the image to produce'
+        required: true
+        type: string
+      image-version:
+        required: false
+        type: string
+        default: latest
+      gradle-task:
+        description: "Gradle task name to produce the image"
+        required: true
+        type: string
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME_PREFIX: psieniawski
+
+jobs:
+  package:
+    name: Package and Publish
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: read
+      packages: write
+      security-events: write
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 17
+          cache: gradle
+      - name: Build ${{ inputs.image-name }} container image
+        run: |
+          chmod +x gradlew
+          ./gradlew ${{ inputs.gradle-task }} \
+          --imageName ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_PREFIX }}/${{ inputs.image-name }}:${{ inputs.image-version }}
+      - name: OCI image vulnerability scanning
+        uses: anchore/scan-action@v3
+        id: scan
+        with:
+          image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_PREFIX }}/${{ inputs.image-name }}:${{ inputs.image-version }}
+          fail-build: false
+          severity-cutoff: high
+          output-format: sarif
+      - name: Upload vulnerability report
+        uses: github/codeql-action/upload-sarif@v2
+        if: success() || failure()
+        with:
+          sarif_file: ${{ steps.scan.outputs.sarif }}
+      - name: Log into container registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish container image
+        run: |
+          docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_PREFIX }}/${{ inputs.image-name }}:${{ inputs.image-version }}
