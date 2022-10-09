@@ -5,7 +5,6 @@ plugins{
 }
 
 
-
 tasks.register("build") {
     group = "build"
     description = "Build all sources"
