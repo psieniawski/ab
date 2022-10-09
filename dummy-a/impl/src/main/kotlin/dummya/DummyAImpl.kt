@@ -1,5 +1,5 @@
 package dummya
 
 class DummyAImpl : DummyA {
-    override fun a() = "A"
+    override fun a() = "AA"
 }

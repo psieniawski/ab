@@ -8,6 +8,6 @@ internal class DummyAImplTest {
 
     @Test
     fun a() {
-        assertThat(dummyA.a()).isEqualTo("A")
+        assertThat(dummyA.a()).isEqualTo("AA")
     }
 }

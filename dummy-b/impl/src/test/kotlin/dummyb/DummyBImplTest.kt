@@ -8,6 +8,6 @@ internal class DummyBImplTest {
 
     @Test
     fun b() {
-        assertThat(dummyB.b()).isEqualTo("B")
+        assertThat(dummyB.b()).isEqualTo("BB")
     }
 }

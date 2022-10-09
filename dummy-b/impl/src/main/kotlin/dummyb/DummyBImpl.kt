@@ -1,5 +1,5 @@
 package dummyb
 
 class DummyBImpl : DummyB {
-    override fun b() = "B"
+    override fun b() = "BB"
 }
