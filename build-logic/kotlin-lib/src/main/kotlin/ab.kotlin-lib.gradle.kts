@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.util.archivesName
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -7,6 +8,10 @@ plugins {
 repositories {
     mavenCentral()
 }
+
+group = "${rootProject.group}.${rootProject.name}"
+archivesName.set("${rootProject.name}_$name")
+version = rootProject.version
 
 dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:5.9.0")

@@ -5,8 +5,8 @@ plugins {
 group = "ab.platform"
 
 //javaPlatform.allowDependencies()
-val kotlinVersion = "1.7.20"
-val springBootVersion = "2.7.4"
+val kotlinVersion : String by project
+val springBootVersion : String by project
 
 dependencies {
     constraints {

@@ -4,5 +4,5 @@ plugins {
 
 dependencies {
     implementation(project(":spring-kotlin-lib"))
-    implementation("org.springframework.boot:spring-boot-gradle-plugin:2.7.4")
+    implementation("org.springframework.boot:spring-boot-gradle-plugin:3.0.0-M5")
 }

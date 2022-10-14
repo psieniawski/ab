@@ -8,4 +8,6 @@ repositories {
 
 dependencies {
     implementation(platform("ab.platform:product-platform"))
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
 }
