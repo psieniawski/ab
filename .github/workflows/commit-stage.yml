@@ -48,3 +48,10 @@ jobs:
     with:
       image-name: dummy-b
       gradle-task: ':dummy-b:boot-app:bootBuildImage'
+  package-dummy-ab:
+    uses: ./.github/workflows/package.yml
+    if: ${{ github.ref == 'refs/heads/main' }}
+    needs: [ build ]
+    with:
+      image-name: dummy-ab
+      gradle-task: ':dummy-ab:boot-app:bootBuildImage'

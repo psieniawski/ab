@@ -6,4 +6,4 @@ import org.springframework.boot.context.properties.bind.DefaultValue
 import java.net.URI
 
 @ConfigurationProperties("dummy-b")
-data class ClientProperties @ConstructorBinding constructor(@param:DefaultValue("localhost:8081") val serviceUri: URI)
+data class ClientProperties @ConstructorBinding constructor(/*@param:DefaultValue("localhost:8081")*/ val serviceUri: URI)
