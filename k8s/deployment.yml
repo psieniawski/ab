@@ -3,15 +3,15 @@ kind: Deployment
 metadata:
   name: dummy-a
   labels:
-    app: dummy
+    app: dummy-a
 spec:
   selector:
     matchLabels:
-      app: dummy
+      app: dummy-a
   template:
     metadata:
       labels:
-        app: dummy
+        app: dummy-a
     spec:
       containers:
         - name: dummy-a
@@ -32,15 +32,15 @@ kind: Deployment
 metadata:
   name: dummy-b
   labels:
-    app: dummy
+    app: dummy-b
 spec:
   selector:
     matchLabels:
-      app: dummy
+      app: dummy-b
   template:
     metadata:
       labels:
-        app: dummy
+        app: dummy-b
     spec:
       containers:
         - name: dummy-b
@@ -51,3 +51,32 @@ spec:
           env:
             - name: BPL_JVM_THREAD_COUNT
               value: "50"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dummy-ab
+  labels:
+    app: dummy-ab
+spec:
+  selector:
+    matchLabels:
+      app: dummy-ab
+  template:
+    metadata:
+      labels:
+        app: dummy-ab
+    spec:
+      containers:
+        - name: dummy-ab
+          image: ghcr.io/psieniawski/dummy-ab
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9001
+          env:
+            - name: BPL_JVM_THREAD_COUNT
+              value: "50"
+            - name: dummy-a_serviceUri
+              value: http://dummy-a-service:9001
+            - name: dummy-b_serviceUri
+              value: http://dummy-b-service:9001

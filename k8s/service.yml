@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: dummy-a-service
+  labels:
+    app: dummy-a
+spec:
+  type: ClusterIP
+  selector:
+    app: dummy-a
+  ports:
+    - protocol: TCP
+      port: 9001
+      targetPort: 9001
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dummy-b-service
+  labels:
+    app: dummy-b
+spec:
+  type: ClusterIP
+  selector:
+    app: dummy-b
+  ports:
+    - protocol: TCP
+      port: 9001
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dummy-ab-service
+  labels:
+    app: dummy-ab
+spec:
+  type: ClusterIP
+  selector:
+    app: dummy-ab
+  ports:
+    - protocol: TCP
+      port: 9001
