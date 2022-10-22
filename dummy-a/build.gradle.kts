@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.util.archivesName
 plugins{
     kotlin("jvm") version "1.7.20" apply false
     kotlin("plugin.spring") version "1.7.20" apply false
-    id("org.springframework.boot") version "3.0.0-M5" apply false
+    id("org.springframework.boot") version "3.0.0-RC1" apply false
 }
 
 group = "ab"
@@ -28,4 +28,10 @@ tasks.register("clean") {
     dependsOn(project(":spring-rest-api").tasks["clean"])
     dependsOn(project(":impl-spring-boot-starter").tasks["clean"])
     dependsOn(project(":boot-app").tasks["clean"])
+}
+
+tasks.register("buildImage") {
+    group = "build"
+    description = "Build Image"
+    dependsOn(project(":boot-app").tasks["bootBuildImage"])
 }

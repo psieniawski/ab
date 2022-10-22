@@ -21,10 +21,10 @@ tasks.register("clean") {
     dependsOn(gradle.includedBuild("dummy-ab").task(":clean"))
 }
 
-tasks.register("buildImage"){
+tasks.register("buildImages"){
     group = "image"
     description = "Build all images"
-    dependsOn(gradle.includedBuild("dummy-a").task(":boot-app:bootBuildImage"))
-    dependsOn(gradle.includedBuild("dummy-b").task(":boot-app:bootBuildImage"))
-    dependsOn(gradle.includedBuild("dummy-ab").task(":boot-app:bootBuildImage"))
+    dependsOn(gradle.includedBuild("dummy-a").task(":buildImage"))
+    dependsOn(gradle.includedBuild("dummy-b").task(":buildImage"))
+    dependsOn(gradle.includedBuild("dummy-ab").task(":buildImage"))
 }

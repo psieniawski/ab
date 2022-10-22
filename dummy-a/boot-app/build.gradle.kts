@@ -16,9 +16,9 @@ dependencies {
 
 tasks.withType<BootBuildImage> {
 //    https://docs.spring.io/spring-boot/docs/current/gradle-plugin/reference/htmlsingle/#build-image.customization
-    imageName = "ghcr.io/psieniawski/dummy-a"
+    imageName.set("ghcr.io/psieniawski/dummy-a")
 //    pullPolicy = ALWAYS
-    environment = mapOf("BP_JVM_VERSION" to "17.*")
+    environment.set(mapOf("BP_JVM_VERSION" to "17.*"))
 //    isVerboseLogging = true
 
     //for local gradle :dummy-a:boot-app:bootBuildImage --publishImage

@@ -15,7 +15,7 @@ dependencies {
 }
 
 tasks.withType<BootBuildImage> {
-    imageName = "ghcr.io/psieniawski/dummy-ab"
-    environment = mapOf("BP_JVM_VERSION" to "17.*")
+    imageName.set("ghcr.io/psieniawski/dummy-ab")
+    environment.set(mapOf("BP_JVM_VERSION" to "17.*"))
 }
 
