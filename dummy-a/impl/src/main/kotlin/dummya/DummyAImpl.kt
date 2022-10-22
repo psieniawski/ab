@@ -1,5 +1,11 @@
 package dummya
 
+import ab.logging.logger
+
 class DummyAImpl : DummyA {
-    override fun a() = "AA"
+    private val log by logger()
+    override fun a(): String {
+        log.info("DummyAImpl#a called")
+        return "AA"
+    }
 }

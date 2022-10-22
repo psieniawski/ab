@@ -2,12 +2,15 @@ plugins {
     id("ab.kotlin-lib")
     kotlin("plugin.spring")
 }
-repositories {
-    maven { url = uri("https://repo.spring.io/libs-milestone") }
-}
+
+// moved to kotlin-lib
+//repositories {
+//    maven { url = uri("https://repo.spring.io/libs-milestone") }
+//}
 
 dependencies {
-    implementation(platform("ab.platform:product-platform"))
+// moved to kotlin-lib
+//    implementation(platform("ab.platform:product-platform"))
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 }

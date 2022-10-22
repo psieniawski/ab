@@ -7,6 +7,7 @@ plugins {
 
 repositories {
     mavenCentral()
+    maven { url = uri("https://repo.spring.io/libs-milestone") }
 }
 
 group = "${rootProject.group}.${rootProject.name}"
@@ -14,8 +15,9 @@ archivesName.set("${rootProject.name}_$name")
 version = rootProject.version
 
 dependencies {
-    testImplementation("org.junit.jupiter:junit-jupiter:5.9.0")
-    testImplementation("org.assertj:assertj-core:3.23.1")
+    implementation(platform("ab.platform:product-platform"))
+    testImplementation("org.junit.jupiter:junit-jupiter")
+    testImplementation("org.assertj:assertj-core")
 }
 
 tasks.withType<KotlinCompile> {

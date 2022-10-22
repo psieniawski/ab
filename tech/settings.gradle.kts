@@ -9,3 +9,4 @@ pluginManagement {
 rootProject.name = "tech"
 
 include("boot-app")
+include("logging")
