@@ -21,14 +21,22 @@ spec:
           ports:
             - name: http
               containerPort: 9001
+          startupProbe:
+            httpGet:
+              port: http
+              path: /actuator/health
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 20
           livenessProbe:
             httpGet:
               port: http
               path: /actuator/health
-            initialDelaySeconds: 60
+            initialDelaySeconds: 10
             periodSeconds: 10
             timeoutSeconds: 2
-            failureThreshold: 5
+            failureThreshold: 3
           lifecycle:
             preStop:
               exec:
@@ -64,14 +72,22 @@ spec:
           ports:
             - name: http
               containerPort: 9001
+          startupProbe:
+            httpGet:
+              port: http
+              path: /actuator/health
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 20
           livenessProbe:
             httpGet:
               port: http
               path: /actuator/health
-            initialDelaySeconds: 60
+            initialDelaySeconds: 10
             periodSeconds: 10
             timeoutSeconds: 2
-            failureThreshold: 5
+            failureThreshold: 3
           lifecycle:
             preStop:
               exec:
@@ -103,14 +119,22 @@ spec:
           ports:
             - name: http
               containerPort: 9001
+          startupProbe:
+            httpGet:
+              port: http
+              path: /actuator/health
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 20
           livenessProbe:
             httpGet:
               port: http
               path: /actuator/health
-            initialDelaySeconds: 60
+            initialDelaySeconds: 10
             periodSeconds: 10
             timeoutSeconds: 2
-            failureThreshold: 5
+            failureThreshold: 3
           lifecycle:
             preStop:
               exec:
