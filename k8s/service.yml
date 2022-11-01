@@ -11,7 +11,7 @@ spec:
   ports:
     - protocol: TCP
       port: 9001
-      targetPort: 9001
+      targetPort: http
 
 ---
 apiVersion: v1
@@ -27,6 +27,7 @@ spec:
   ports:
     - protocol: TCP
       port: 9001
+      targetPort: http
 
 ---
 apiVersion: v1
@@ -42,3 +43,4 @@ spec:
   ports:
     - protocol: TCP
       port: 9001
+      targetPort: http

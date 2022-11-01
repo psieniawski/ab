@@ -5,7 +5,7 @@ metadata:
   labels:
     app: dummy-a
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: dummy-a
@@ -19,7 +19,8 @@ spec:
           image: ghcr.io/psieniawski/dummy-a
           imagePullPolicy: Always
           ports:
-            - containerPort: 9001
+            - name: http
+              containerPort: 9001
           lifecycle:
             preStop:
               exec:
@@ -39,7 +40,7 @@ metadata:
   labels:
     app: dummy-b
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: dummy-b
@@ -53,7 +54,8 @@ spec:
           image: ghcr.io/psieniawski/dummy-b
           imagePullPolicy: Always
           ports:
-            - containerPort: 9001
+            - name: http
+              containerPort: 9001
           lifecycle:
             preStop:
               exec:
@@ -69,7 +71,7 @@ metadata:
   labels:
     app: dummy-ab
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: dummy-ab
@@ -83,7 +85,8 @@ spec:
           image: ghcr.io/psieniawski/dummy-ab
           imagePullPolicy: Always
           ports:
-            - containerPort: 9001
+            - name: http
+              containerPort: 9001
           lifecycle:
             preStop:
               exec:
