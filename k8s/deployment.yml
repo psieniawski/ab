@@ -21,6 +21,14 @@ spec:
           ports:
             - name: http
               containerPort: 9001
+          livenessProbe:
+            httpGet:
+              port: http
+              path: /actuator/health
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 5
           lifecycle:
             preStop:
               exec:
@@ -56,6 +64,14 @@ spec:
           ports:
             - name: http
               containerPort: 9001
+          livenessProbe:
+            httpGet:
+              port: http
+              path: /actuator/health
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 5
           lifecycle:
             preStop:
               exec:
@@ -87,6 +103,14 @@ spec:
           ports:
             - name: http
               containerPort: 9001
+          livenessProbe:
+            httpGet:
+              port: http
+              path: /actuator/health
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 5
           lifecycle:
             preStop:
               exec:
