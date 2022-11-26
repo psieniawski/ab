@@ -1,9 +1,9 @@
 import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.util.archivesName
 
 plugins{
-    kotlin("jvm") version "1.7.20" apply false
-    kotlin("plugin.spring") version "1.7.20" apply false
-    id("org.springframework.boot") version "3.0.0-RC1" apply false
+    kotlin("jvm") version "1.7.21" apply false
+    kotlin("plugin.spring") version "1.7.21" apply false
+    id("org.springframework.boot") version "3.0.0" apply false
 }
 
 group = "ab"
