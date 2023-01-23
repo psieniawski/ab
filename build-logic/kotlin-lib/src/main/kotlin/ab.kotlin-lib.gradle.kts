@@ -7,7 +7,7 @@ plugins {
 
 repositories {
     mavenCentral()
-    maven { url = uri("https://repo.spring.io/libs-milestone") }
+//    maven { url = uri("https://repo.spring.io/libs-milestone") }
 }
 
 group = "${rootProject.group}.${rootProject.name}"
@@ -20,12 +20,19 @@ dependencies {
     testImplementation("org.assertj:assertj-core")
 }
 
+kotlin {
+    jvmToolchain {
+        languageVersion.set(JavaLanguageVersion.of("19"))
+    }
+}
+
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")
-        jvmTarget = "17"
+//        jvmTarget = "19"
     }
 }
+
 
 tasks.withType<Test> {
     useJUnitPlatform()

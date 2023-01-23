@@ -11,6 +11,6 @@ plugins {
 dependencies {
 // moved to kotlin-lib
 //    implementation(platform("ab.platform:product-platform"))
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 }

@@ -15,5 +15,5 @@ dependencies {
 tasks.withType<BootBuildImage> {
 //    https://docs.spring.io/spring-boot/docs/current/gradle-plugin/reference/htmlsingle/#build-image.customization
     imageName.set("ghcr.io/psieniawski/dummy-b")
-    environment.set(mapOf("BP_JVM_VERSION" to "17.*"))
+    environment.set(mapOf("BP_JVM_VERSION" to "19.*"))
 }
