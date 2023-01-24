@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("dummya")
+@RequestMapping("/")
 class DummyAController(val dummyA: DummyA) {
     private val log by logger()
     @GetMapping

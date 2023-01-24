@@ -1,0 +1,36 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ab
+spec:
+  rules:
+    - host: dummy-ab.ab
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: dummy-ab
+                port:
+                  name: http
+    - host: dummy-a.ab
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: dummy-a
+                port:
+                  name: http
+    - host: dummy-b.ab
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: dummy-b
+                port:
+                  name: http

@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dummy-b
+  labels:
+    app: dummy-b
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: dummy-b
+  template:
+    metadata:
+      labels:
+        app: dummy-b
+    spec:
+      containers:
+        - name: dummy-b
+          image: ghcr.io/psieniawski/dummy-b
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 9001
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: dummy-b
+  labels:
+    app: dummy-b
+spec:
+  type: ClusterIP
+  selector:
+    app: dummy-b
+  ports:
+    - name: http
+      protocol: TCP
+      port: 9001
+      targetPort: http
