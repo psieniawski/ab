@@ -1,10 +1,16 @@
-debug: true
+#debug: true
 management:
   endpoints:
     web:
       exposure:
         include: '*'
   endpoint:
+    health:
+      show-details: always
+      show-components: always
+      probes:
+        # default on Kubernetes
+        enabled: true
     shutdown:
       enabled: true
 server:
