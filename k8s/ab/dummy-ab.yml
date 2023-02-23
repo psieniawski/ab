@@ -1,11 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  namespace: ab
   name: dummy-ab
   labels:
     app: dummy-ab
 spec:
-  replicas: 4
+  replicas: 2
   selector:
     matchLabels:
       app: dummy-ab
@@ -21,6 +22,14 @@ spec:
           ports:
             - name: http
               containerPort: 9001
+          livenessProbe:
+            httpGet:
+              port: http
+              path: /actuator/health
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 3
           env:
             - name: dummy-a_serviceUri
               value: http://dummy-a:9001
@@ -30,6 +39,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  namespace: ab
   name: dummy-ab
   labels:
     app: dummy-ab

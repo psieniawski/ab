@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  {{ if .Values.namespace }}namespace: {{ .Values.namespace }} {{end}}
+  name: {{ .Release.Name }}-dummy-a
+  labels:
+    app: {{ .Release.Name }}-dummy-a
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-dummy-a
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-dummy-a
+    spec:
+      containers:
+        - name: dummy-a
+          image: ghcr.io/psieniawski/dummy-a
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 9001
+          livenessProbe:
+            httpGet:
+              port: http
+              path: /actuator/health
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            timeoutSeconds: 2
+            failureThreshold: 3
+---
+apiVersion: v1
+kind: Service
+metadata:
+  {{ if .Values.namespace }}namespace: {{ .Values.namespace }} {{end}}
+  name: {{ .Release.Name }}-dummy-a
+  labels:
+    app: {{ .Release.Name }}-dummy-a
+spec:
+  type: ClusterIP
+  selector:
+    app: {{ .Release.Name }}-dummy-a
+  ports:
+    - name: http
+      protocol: TCP
+      port: 9001
+      targetPort: http

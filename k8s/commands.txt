@@ -1,0 +1,8 @@
+k config set-context --current --namespace=ab
+
+curl --resolve dummy-a.ab:80:192.168.24.140 http://dummy-a.ab -v
+curl --resolve dummy-ab.ab:80:192.168.24.140 http://dummy-ab.ab -v
+ab -n 1000 -c 8 -H "Host: dummy-ab.ab" http://192.168.24.140/
+
+
+

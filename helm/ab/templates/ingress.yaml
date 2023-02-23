@@ -1,7 +1,8 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ab
+  namespace: {{ .Values.namespace }}
+  name: {{ .Release.Name }}-ingress
 spec:
   rules:
     - host: dummy-ab.ab
@@ -11,7 +12,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: dummy-ab
+                name: {{ .Release.Name }}-dummy-ab
                 port:
                   name: http
     - host: dummy-a.ab
@@ -21,7 +22,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: dummy-a
+                name: {{ .Release.Name }}-dummy-a
                 port:
                   name: http
     - host: dummy-b.ab
@@ -31,6 +32,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: dummy-b
+                name: {{ .Release.Name }}-dummy-b
                 port:
                   name: http

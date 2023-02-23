@@ -25,3 +25,7 @@ server:
 spring:
   lifecycle:
     timeout-per-shutdown-phase: 15s
+#logging:
+#  pattern:
+#  level:
+#    ab: info
