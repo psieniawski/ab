@@ -6,4 +6,5 @@ dependencies {
     api(project(":api"))
     implementation("ab.dummy-a:api")
     implementation("ab.dummy-b:api")
+    implementation("ab.tech:logging")
 }

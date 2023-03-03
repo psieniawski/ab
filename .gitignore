@@ -4,3 +4,5 @@
 .vscode
 build
 bin
+
+k8s/grafana/grafana-agent-operator.yaml
