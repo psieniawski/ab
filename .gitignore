@@ -5,4 +5,4 @@
 build
 bin
 
-k8s/grafana/grafana-agent-operator.yaml
+k8s/telemetry/grafana/grafana-agent-operator.yaml
