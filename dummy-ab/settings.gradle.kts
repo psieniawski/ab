@@ -1,8 +1,17 @@
 pluginManagement {
     includeBuild("../build-logic")
+
+    plugins {
+        val kotlinVersion: String by settings
+        val springBootVersion: String by settings
+        kotlin("jvm") version "$kotlinVersion" apply false
+        kotlin("plugin.spring") version "$kotlinVersion" apply false
+        id("org.springframework.boot") version "$springBootVersion" apply false
+    }
+
     repositories {
         gradlePluginPortal()
-        maven { url = uri("https://repo.spring.io/milestone") }
+//        maven { url = uri("https://repo.spring.io/milestone") }
     }
 }
 

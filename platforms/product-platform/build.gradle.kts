@@ -3,9 +3,11 @@ plugins {
 }
 
 group = "ab.platform"
-javaPlatform.allowDependencies()
+javaPlatform {
+    allowDependencies()
+}
 
-val springBootVersion : String by project
+val springBootVersion: String by project
 
 dependencies {
     api(platform("org.springframework.boot:spring-boot-dependencies:$springBootVersion"))

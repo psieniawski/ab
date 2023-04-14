@@ -7,15 +7,10 @@ plugins {
 group = "ab"
 version = "0.0.1-SNAPSHOT"
 
+
 dependencies {
     implementation(project(":impl-spring-boot-starter"))
     implementation(project(":spring-rest-api"))
     implementation("ab.dummy-a:rest-impl")
     implementation("ab.dummy-b:rest-impl")
 }
-
-tasks.withType<BootBuildImage> {
-    imageName.set("ghcr.io/psieniawski/dummy-ab")
-    environment.set(mapOf("BP_JVM_VERSION" to "19.*"))
-}
-

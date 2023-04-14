@@ -1,0 +1,5 @@
+# install cert-manager
+https://cert-manager.io/docs/installation/helm/
+# then the Operator
+https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-operator
+

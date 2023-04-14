@@ -1,7 +1,7 @@
-plugins{
-    kotlin("jvm") version "1.8.10" apply false
-    kotlin("plugin.spring") version "1.8.10" apply false
-    id("org.springframework.boot") version "3.0.4" apply false
+plugins {
+    kotlin("jvm") apply false
+    kotlin("plugin.spring") apply false
+    id("org.springframework.boot") apply false
 }
 
 group = "ab"

@@ -3,28 +3,24 @@
 // Executed during Configuration phase: https://docs.gradle.org/current/userguide/build_lifecycle.html
 // Prepares build configuration to be executed during Execution phase
 // When Gradle executes a Kotlin build script (.gradle.kts), it compiles the script into a subclass of KotlinBuildScript.
-// This is an example of a lifecycle task that crosses build boundaries defined in the umbrella build.
+
+
+val allSubprojects = listOf("dummy-a", "dummy-b", "dummy-ab")
 
 tasks.register("build") {
     group = "build"
     description = "Build all sources"
-    dependsOn(gradle.includedBuild("dummy-a").task(":build"))
-    dependsOn(gradle.includedBuild("dummy-b").task(":build"))
-    dependsOn(gradle.includedBuild("dummy-ab").task(":build"))
+    allSubprojects.forEach { dependsOn(gradle.includedBuild(it).task(":build")) }
 }
 
 tasks.register("clean") {
     group = "clean"
     description = "Clean"
-    dependsOn(gradle.includedBuild("dummy-a").task(":clean"))
-    dependsOn(gradle.includedBuild("dummy-b").task(":clean"))
-    dependsOn(gradle.includedBuild("dummy-ab").task(":clean"))
+    allSubprojects.forEach { dependsOn(gradle.includedBuild(it).task(":clean")) }
 }
 
-tasks.register("buildImages"){
+tasks.register("buildImages") {
     group = "image"
     description = "Build all images"
-    dependsOn(gradle.includedBuild("dummy-a").task(":buildImage"))
-    dependsOn(gradle.includedBuild("dummy-b").task(":buildImage"))
-    dependsOn(gradle.includedBuild("dummy-ab").task(":buildImage"))
+    allSubprojects.forEach { dependsOn(gradle.includedBuild(it).task(":buildImage")) }
 }

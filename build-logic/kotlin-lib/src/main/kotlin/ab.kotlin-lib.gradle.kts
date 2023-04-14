@@ -22,14 +22,17 @@ dependencies {
 
 kotlin {
     jvmToolchain {
-        languageVersion.set(JavaLanguageVersion.of("19"))
+        languageVersion.set(JavaLanguageVersion.of("17"))
     }
 }
 
 tasks.withType<KotlinCompile> {
+    compilerOptions {
+
+    }
     kotlinOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")
-//        jvmTarget = "19"
+        jvmTarget = "17"
     }
 }
 

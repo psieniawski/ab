@@ -1,10 +1,11 @@
+// The Java Platform plugin brings the ability to declare platforms for the Java ecosystem.
+// https://docs.gradle.org/current/userguide/java_platform_plugin.html
 plugins {
     `java-platform`
 }
 
 group = "ab.platform"
 
-//javaPlatform.allowDependencies()
 val kotlinVersion : String by project
 val springBootVersion : String by project
 

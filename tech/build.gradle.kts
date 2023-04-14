@@ -1,6 +1,6 @@
 plugins{
-    kotlin("jvm") version "1.8.10" apply false
-    kotlin("plugin.spring") version "1.8.10" apply false
+    kotlin("jvm") apply false
+    kotlin("plugin.spring") apply false
 }
 
 
