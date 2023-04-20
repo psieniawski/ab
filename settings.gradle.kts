@@ -3,9 +3,11 @@
 // Executed during Initialization phase: https://docs.gradle.org/current/userguide/build_lifecycle.html
 rootProject.name = "ab"
 
-includeBuild("build-logic")
-includeBuild("platforms")
-includeBuild("tech")
-includeBuild("dummy-b")
-includeBuild("dummy-a")
-includeBuild("dummy-ab")
+val kotlinVersion: String by settings
+val springBootVersion: String by settings
+
+val allSubprojects = listOf("build-logic", "platforms", "tech", "dummy-a", "dummy-b", "dummy-ab")
+
+allSubprojects.forEach {
+    includeBuild(it)
+}
