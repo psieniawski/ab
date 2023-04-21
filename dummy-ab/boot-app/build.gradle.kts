@@ -11,6 +11,13 @@ version = "0.0.1-SNAPSHOT"
 dependencies {
     implementation(project(":impl-spring-boot-starter"))
     implementation(project(":spring-rest-api"))
-    implementation("ab.dummy-a:rest-impl")
-    implementation("ab.dummy-b:rest-impl")
+
+// for distributed
+//    implementation("ab.dummy-a:rest-impl")
+//    implementation("ab.dummy-b:rest-impl")
+
+// for monolith
+    implementation("ab.dummy-a:impl-spring-boot-starter")
+    implementation("ab.dummy-b:impl-spring-boot-starter")
+
 }
