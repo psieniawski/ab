@@ -1,0 +1,208 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: grafana-agent
+  namespace: grafana
+---
+apiVersion: v1
+data: {}
+kind: Secret
+metadata:
+  name: metrics-secret
+  namespace: grafana
+stringData:
+#  password: eyJrIjoiNjM4ZTYzMzg1OTMyNzY3MTE0OGM5MGMzOWRkZTM3ZmEwY2M4YTRhMiIsIm4iOiJzdGFjay01MjI5ODEtZWFzeXN0YXJ0LXByb20tcHVibGlzaGVyIiwiaWQiOjc4MzMyMn0=
+  password: eyJrIjoiMmIzNWJjNzc2NTY3N2JlZmZlMjYwYzRiNjFjNmVhNWZiZTZkNzIzYyIsIm4iOiJwdWJsaXNoZXIta2V5IiwiaWQiOjc4MzMyMn0=
+  username: "372344"
+type: Opaque
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: grafana-agent
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - nodes
+      - nodes/proxy
+      - nodes/metrics
+      - services
+      - endpoints
+      - pods
+      - events
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - networking.k8s.io
+    resources:
+      - ingresses
+    verbs:
+      - get
+      - list
+      - watch
+  - nonResourceURLs:
+      - /metrics
+      - /metrics/cadvisor
+    verbs:
+      - get
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: grafana-agent
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: grafana-agent
+subjects:
+  - kind: ServiceAccount
+    name: grafana-agent
+    namespace: grafana
+---
+apiVersion: monitoring.grafana.com/v1alpha1
+kind: GrafanaAgent
+metadata:
+  name: grafana-agent
+  namespace: grafana
+spec:
+  disableReporting: true
+  disableSupportBundle: true
+  image: grafana/agent:v0.32.1
+  logs:
+    instanceSelector:
+      matchLabels:
+        agent: grafana-agent
+  metrics:
+    instanceSelector:
+      matchLabels:
+        agent: grafana-agent
+  serviceAccountName: grafana-agent
+---
+apiVersion: monitoring.grafana.com/v1alpha1
+kind: LogsInstance
+metadata:
+  labels:
+    agent: grafana-agent
+  name: grafana-agent-logs
+  namespace: grafana
+spec:
+  clients:
+    - basicAuth:
+        password:
+          key: password
+          name: metrics-secret
+        username:
+          key: username
+          name: metrics-secret
+      externalLabels:
+        cluster: kube-one
+      url: https://logs-prod-008.grafana.net/loki/api/v1/push
+  podLogsNamespaceSelector: {}
+  podLogsSelector:
+    matchLabels:
+      instance: primary
+---
+apiVersion: monitoring.grafana.com/v1alpha1
+kind: PodLogs
+metadata:
+  labels:
+    instance: primary
+  name: kubernetes-logs
+  namespace: grafana
+spec:
+  namespaceSelector:
+    any: true
+  pipelineStages:
+    - cri: {}
+  relabelings:
+    - sourceLabels:
+        - __meta_kubernetes_pod_node_name
+      targetLabel: __host__
+    - action: labelmap
+      regex: __meta_kubernetes_pod_label_(.+)
+    - action: replace
+      sourceLabels:
+        - __meta_kubernetes_namespace
+      targetLabel: namespace
+    - action: replace
+      sourceLabels:
+        - __meta_kubernetes_pod_name
+      targetLabel: pod
+    - action: replace
+      sourceLabels:
+        - __meta_kubernetes_container_name
+      targetLabel: container
+    - replacement: /var/log/pods/*$1/*.log
+      separator: /
+      sourceLabels:
+        - __meta_kubernetes_pod_uid
+        - __meta_kubernetes_pod_container_name
+      targetLabel: __path__
+  selector:
+    matchLabels: {}
+---
+
+apiVersion: monitoring.grafana.com/v1alpha1
+kind: MetricsInstance
+metadata:
+  name: grafana-agent-metrics
+  namespace: grafana
+  labels:
+    agent: grafana-agent
+spec:
+  remoteWrite:
+    - url: https://prometheus-prod-05-gb-south-0.grafana.net/api/prom/push
+      basicAuth:
+        username:
+          name: metrics-secret
+          key: username
+        password:
+          name: metrics-secret
+          key: password
+
+  # As an alternative authentication method, Grafana Agent also supports OAuth2.
+  # - url: your_remote_write_URL
+  #   oauth2:
+  #     clientId:
+  #       secret:
+  #         key: username # Kubernetes Secret Key
+  #         name: primary-credentials-metrics # Kubernetes Secret Name
+  #     clientSecret:
+  #       key: password # Kubernetes Secret Key
+  #       name: primary-credentials-metrics # Kubernetes Secret Name
+  #     tokenUrl: https://auth.example.com/realms/master/protocol/openid-connect/token
+
+
+  # Supply an empty namespace selector to look in all namespaces. Remove
+  # this to only look in the same namespace as the MetricsInstance CR
+  serviceMonitorNamespaceSelector: {}
+  serviceMonitorSelector:
+    matchLabels:
+      instance: primary
+
+  # Supply an empty namespace selector to look in all namespaces. Remove
+  # this to only look in the same namespace as the MetricsInstance CR.
+  podMonitorNamespaceSelector: {}
+  podMonitorSelector:
+    matchLabels:
+      instance: primary
+
+  # Supply an empty namespace selector to look in all namespaces. Remove
+  # this to only look in the same namespace as the MetricsInstance CR.
+  probeNamespaceSelector: {}
+  probeSelector:
+    matchLabels:
+      instance: primary
+
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  labels:
+    instance: primary
+  name: kubernetes-metrics
+  namespace: grafana
+spec:

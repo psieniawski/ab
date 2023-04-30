@@ -4,5 +4,3 @@
 .vscode
 build
 bin
-
-k8s/telemetry/grafana/grafana-agent-operator.yaml
