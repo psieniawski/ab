@@ -2,40 +2,40 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: monitoring
-  name: prometheus
+  name: grafana
   labels:
-    app: prometheus
+    app: grafana
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: prometheus
+      app: grafana
   template:
     metadata:
       labels:
-        app: prometheus
+        app: grafana
     spec:
       containers:
-        - image: prom/prometheus:latest
-          name: prometheus
+        - image: grafana/grafana:latest
+          name: grafana
           imagePullPolicy: Always
           ports:
             - name: http
-              containerPort: 9090
+              containerPort: 3000
 ---
 apiVersion: v1
 kind: Service
 metadata:
   namespace: monitoring
-  name: prometheus
+  name: grafana
   labels:
-    app: prometheus
+    app: grafana
 spec:
   type: ClusterIP
   selector:
-    app: prometheus
+    app: grafana
   ports:
     - name: http
       protocol: TCP
-      port: 9090
+      port: 9001
       targetPort: http
