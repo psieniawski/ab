@@ -1,6 +1,7 @@
 //import org.springframework.boot.buildpack.platform.build.PullPolicy.NEVER
 //import org.springframework.boot.buildpack.platform.build.PullPolicy.ALWAYS
 import org.springframework.boot.gradle.tasks.bundling.BootBuildImage
+import org.springframework.boot.gradle.tasks.run.BootRun
 
 plugins {
     id("ab.spring-kotlin-lib")
@@ -26,6 +27,11 @@ tasks.withType<BootBuildImage> {
 
 springBoot {
     mainClass.value("ab.TheAppKt")
+    buildInfo()
+}
+
+tasks.named<BootRun>("bootRun") {
+    jvmArgs = listOf("-Xlog:gc","-Xms1g","-Xmx1g")
 }
 
 dependencies {
