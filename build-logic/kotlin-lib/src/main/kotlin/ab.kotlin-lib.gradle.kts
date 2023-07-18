@@ -1,3 +1,5 @@
+import gradle.kotlin.dsl.accessors._c3b5a8584877c7599cd6fe5cb3cf4f8d.implementation
+import gradle.kotlin.dsl.accessors._c3b5a8584877c7599cd6fe5cb3cf4f8d.testImplementation
 import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.util.archivesName
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -17,6 +19,7 @@ version = rootProject.version
 dependencies {
     implementation(platform("ab.platform:product-platform"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     testImplementation("org.assertj:assertj-core")
 }
 
