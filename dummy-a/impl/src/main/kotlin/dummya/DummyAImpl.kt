@@ -17,7 +17,7 @@ class DummyAImpl : DummyA {
         } catch (e: InterruptedException) {
             Thread.currentThread().interrupt()
         }
-
+        log.info("Returning")
         return "AA"
     }
 }

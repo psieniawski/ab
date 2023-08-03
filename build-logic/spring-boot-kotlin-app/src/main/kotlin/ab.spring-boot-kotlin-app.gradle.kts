@@ -26,7 +26,8 @@ tasks.withType<BootBuildImage> {
 
 
 springBoot {
-    mainClass.value("ab.TheAppKt")
+//    mainClass.value("ab.TheAppKt")
+    mainClass.set("ab.TheAppKt")
     buildInfo()
 }
 

@@ -15,11 +15,14 @@ class DummyABImpl(private val dummyA: DummyA, private val dummyB: DummyB) : Dumm
         val i = random.nextInt(100)
         val sleep = if (i >= 95) 400L else 50L
         try {
+            log.info("Going sleep")
             TimeUnit.MILLISECONDS.sleep(sleep)
+            log.info("Waking up")
         } catch (e: InterruptedException) {
             Thread.currentThread().interrupt()
         }
-
-        return "${dummyA.a()}:${dummyB.b()}"
+        val ret = "${dummyA.a()}:${dummyB.b()}"
+        log.info("Returning: $ret")
+        return ret
     }
 }
