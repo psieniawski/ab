@@ -1,6 +1,7 @@
 ## Howto
 
-### Change vm limits on worker nodes
+1. Change vm limits on worker nodes
+
 https://www.elastic.co/guide/en/elasticsearch/reference/current/vm-max-map-count.html
 
    `sysctl -w vm.max_map_count=262144`
@@ -9,31 +10,27 @@ https://www.elastic.co/guide/en/elasticsearch/reference/current/vm-max-map-count
 
    To set this value permanently, update the vm.max_map_count setting in /etc/sysctl.conf. To verify after rebooting, run sysctl vm.max_map_count.
 
-### Create and set the namespace
-
-    kubectl create ns telemetry
-    kubectl config set-context --current --namespace=telemetry
-
-### Install the engine 
-1. Add helm repo. [Guide from Open Search Github](https://github.com/opensearch-project/helm-charts/blob/main/README.md)
+2. [Install the operator](https://github.com/Opster/opensearch-k8s-operator)
 
 
-    helm repo add opensearch https://opensearch-project.github.io/helm-charts/
-    helm repo update
-    helm search repo opensearch
+    helm repo add opensearch-operator https://opster.github.io/opensearch-k8s-operator/
+    helm install opensearch-operator opensearch-operator/opensearch-operator
 
-2. Install engine helm chart Add helm repo. [Guide from Open Search Github](https://github.com/opensearch-project/helm-charts/blob/main/charts/opensearch/README.md)
-    
-
-    helm install opensearch opensearch/opensearch
-
-### Install dashboard helm chart
-
-1. Install dashboard helm chart [Guide from Open Search Github](https://github.com/opensearch-project/helm-charts/blob/main/charts/opensearch-dashboards/README.md)
+3. [Install cluster with HELM...](https://github.com/Opster/opensearch-k8s-operator/blob/main/docs/userguide/cluster-chart.md)
 
     
-    helm install opensearch-dashboards opensearch/opensearch-dashboards -f k8s/telemetry/OpenSearch/os-dashboards-config.yaml
+    (isn't working - missing chart in repo) helm install os-cluster opensearch-operator/opensearch-cluster
 
-2. Add DNS entry, matching ingress config [~~192.168.24.140 opensearch.k8s~~]
- 
-    
+4. [... or using custom object](https://github.com/Opster/opensearch-k8s-operator/blob/main/docs/userguide/main.md)
+
+
+    kubectl apply -f cluster-one.yaml
+
+5. [Optional][Install Operator Management Console](https://opster.com/docs/omc/how-to-install-the-opster-management-console/)
+
+
+    helm repo add opster-omc https://opster.github.io/omc-helm/
+    helm install opster-omc opster-omc/omc
+    kubectl apply -f omc-ingress.yaml
+
+

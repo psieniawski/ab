@@ -1,0 +1,93 @@
+---
+apiVersion: opensearch.opster.io/v1
+kind: OpenSearchCluster
+metadata:
+  name: cluster-one
+  namespace: telemetry
+spec:
+  bootstrap:
+    resources: {}
+  confMgmt:
+    smartScaler: true
+  dashboards:
+    enable: true
+    opensearchCredentialsSecret: {}
+    replicas: 1
+    resources:
+      limits:
+        cpu: 500m
+        memory: 1Gi
+      requests:
+        cpu: 500m
+        memory: 1Gi
+    service:
+      type: ClusterIP
+    tls:
+      caSecret: {}
+      secret: {}
+    version: 2.9.0
+  general:
+    additionalConfig:
+      node.search.cache.size: 10m
+    defaultRepo: opensearchproject
+    httpPort: 9200
+    monitoring: {}
+    serviceName: cluster-one
+    setVMMaxMapCount: true
+    vendor: opensearch
+    version: 2.9.0
+  initHelper:
+    image: public.ecr.aws/opsterio/busybox
+    resources: {}
+  nodePools:
+    - component: pool-one
+      diskSize: 50Gi
+      persistence:
+        pvc:
+          accessModes:
+            - ReadWriteOnce
+          storageClass: local-path
+      replicas: 3
+      resources:
+        limits:
+          cpu: 2
+          memory: 4Gi
+        requests:
+          cpu: 500m
+          memory: 1Gi
+      roles:
+        - cluster_manager
+        - data
+        - ingest
+        - coordinating
+        - dynamic
+        - search
+  security:
+    tls:
+      http:
+        caSecret: {}
+        generate: true
+        secret: {}
+      transport:
+        caSecret: {}
+        generate: true
+        secret: {}
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: cluster-one-dashboard-ingress
+  namespace: telemetry
+spec:
+  rules:
+    - host: os-one.k8s
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: cluster-one-dashboards
+                port:
+                  number: 5601

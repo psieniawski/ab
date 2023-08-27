@@ -1,9 +1,0 @@
-ingress:
-  enabled: true
-  hosts:
-    - host: opensearch.k8s
-      paths:
-        - path: /
-          backend:
-            serviceName: ""
-            servicePort: ""
