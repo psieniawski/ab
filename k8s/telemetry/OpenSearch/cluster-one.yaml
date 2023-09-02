@@ -2,7 +2,7 @@
 apiVersion: opensearch.opster.io/v1
 kind: OpenSearchCluster
 metadata:
-  name: cluster-one
+  name: os-cluster-one
   namespace: telemetry
 spec:
   bootstrap:
@@ -32,7 +32,7 @@ spec:
     defaultRepo: opensearchproject
     httpPort: 9200
     monitoring: {}
-    serviceName: cluster-one
+    serviceName: os-cluster-one
     setVMMaxMapCount: true
     vendor: opensearch
     version: 2.9.0
@@ -50,7 +50,7 @@ spec:
       replicas: 3
       resources:
         limits:
-          cpu: 2
+          cpu: 1
           memory: 4Gi
         requests:
           cpu: 500m
@@ -77,7 +77,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: cluster-one-dashboard-ingress
+  name: os-cluster-one-dashboard-ingress
   namespace: telemetry
 spec:
   rules:
@@ -88,6 +88,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: cluster-one-dashboards
+                name: os-cluster-one-dashboards
                 port:
                   number: 5601
