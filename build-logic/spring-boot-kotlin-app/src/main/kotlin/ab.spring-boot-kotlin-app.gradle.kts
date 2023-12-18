@@ -12,7 +12,7 @@ tasks.withType<BootBuildImage> {
 //    https://docs.spring.io/spring-boot/docs/current/gradle-plugin/reference/htmlsingle/#build-image.customization
     imageName.set("ghcr.io/psieniawski/${ext["imageName"]}")
 //    pullPolicy = ALWAYS
-    environment.set(mapOf("BP_JVM_VERSION" to "17.*"))
+    environment.set(mapOf("BP_JVM_VERSION" to "21.*"))
 //    isVerboseLogging = true
 
     //for local gradle :dummy-a:boot-app:bootBuildImage --publishImage
