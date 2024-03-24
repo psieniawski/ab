@@ -1,8 +1,17 @@
+import gradle.kotlin.dsl.accessors._15e6c8a47fe4506baa4405afd1b8b845.idea
 import org.jetbrains.kotlin.gradle.plugin.mpp.pm20.util.archivesName
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("jvm")
+    idea
+}
+
+idea{
+     module{
+         isDownloadSources = true
+         isDownloadJavadoc = true
+     }
 }
 
 repositories {

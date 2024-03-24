@@ -32,7 +32,9 @@ springBoot {
 }
 
 tasks.named<BootRun>("bootRun") {
+//    jvmArgs = listOf("-XX:+UseShenandoahGC","-Xlog:gc","-Xms512m","-Xmx1g")
     jvmArgs = listOf("-Xlog:gc","-Xms512m","-Xmx1g")
+//    jvmArgs = listOf("-XX:+UseSerialGC","-Xlog:gc","-Xms512m","-Xmx1g")
 }
 
 dependencies {
