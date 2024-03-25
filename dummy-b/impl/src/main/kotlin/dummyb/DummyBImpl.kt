@@ -10,13 +10,13 @@ class DummyBImpl : DummyB {
     override fun b(): String {
         log.info("DummyBImpl#b called")
 
-        val i = random.nextInt(100)
-        val sleep = if (i >= 95) 400L else 50L
-        try {
-            TimeUnit.MILLISECONDS.sleep(sleep)
-        } catch (e: InterruptedException) {
-            Thread.currentThread().interrupt()
-        }
+//        val i = random.nextInt(100)
+//        val sleep = if (i >= 95) 400L else 50L
+//        try {
+//            TimeUnit.MILLISECONDS.sleep(sleep)
+//        } catch (e: InterruptedException) {
+//            Thread.currentThread().interrupt()
+//        }
         log.info("Returning")
         return "BB"
     }
