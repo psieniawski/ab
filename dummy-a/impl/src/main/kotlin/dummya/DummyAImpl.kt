@@ -10,13 +10,13 @@ class DummyAImpl : DummyA {
     override fun a(): String {
         log.info("DummyAImpl#a called")
 
-//        val i = random.nextInt(100)
-//        val sleep = if (i >= 95) 400L else 50L
-//        try {
-//            TimeUnit.MILLISECONDS.sleep(sleep)
-//        } catch (e: InterruptedException) {
-//            Thread.currentThread().interrupt()
-//        }
+        val i = random.nextInt(100)
+        val sleep = if (i >= 95) 40L else 5L
+        try {
+            TimeUnit.MILLISECONDS.sleep(sleep)
+        } catch (e: InterruptedException) {
+            Thread.currentThread().interrupt()
+        }
         log.info("Returning")
         return "AA"
     }
